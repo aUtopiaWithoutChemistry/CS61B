@@ -92,9 +92,14 @@ public class Model {
      *  Empty spaces are stored as null.
      * */
     public static boolean emptySpaceExists(Board b) {
-        // TODO: Fill in this function.
-
-
+        // TODO: Fill in this function. ✅
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (b.tile(i, j) == null) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -105,8 +110,14 @@ public class Model {
      */
     public static boolean maxTileExists(Board b) {
         // TODO: Fill in this function.
-
-
+        for (int i = 0; i < b.size(); i++) {
+            for (int j = 0; j < b.size(); j++) {
+                Tile curTile = b.tile(i, j);
+                if (curTile != null && curTile.value() == MAX_PIECE) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -119,6 +130,40 @@ public class Model {
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
 
+        if (emptySpaceExists(b)) {
+            return true;
+        }
+
+        else if (sameTileAdjacent(b)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean sameTileAdjacent(Board b) {
+        for (int i = 0; i < b.size(); i++) {
+            for (int j = 0; j < b.size()-1; j++) {
+
+                /** to check each row if there same tile adjacent*/
+                if (b.tile(i, j) != null && b.tile(i, j+1) != null) {
+                    Tile curTile = b.tile(i, j);
+                    Tile nextTile = b.tile(i, j+1);
+                    if (curTile.value() == nextTile.value()) {
+                        return true;
+                    }
+                }
+
+                /** to check each column if there same tile adjacent*/
+                if (b.tile(j, i) != null && b.tile(j+1, i) != null) {
+                    Tile curTile = b.tile(j, i);
+                    Tile nextTile = b.tile(j+1, i);
+                    if (curTile.value() == nextTile.value()) {
+                        return true;
+                    }
+                }
+            }
+        }
 
         return false;
     }
@@ -138,9 +183,95 @@ public class Model {
     public void tilt(Side side) {
         // TODO: Modify this.board (and if applicable, this.score) to account
         // for the tilt to the Side SIDE.
+        board.setViewingPerspective(side);
 
+        for (int col = 0; col < board.size(); col++) {
+            int[] pattern = new int[board.size()];
+            int[] target = new int[board.size()];
+            int cnt = 0;
+
+            // find the pattern
+            for (int row = 0; row < board.size(); row++) {
+                if (board.tile(col, row) == null) {
+                    pattern[row] = 0;
+                } else {
+                    pattern[row] = board.tile(col, row).value();
+                    target[cnt] = board.tile(col, row).value();
+                    cnt++;
+                }
+            }
+
+            // no merge ✅
+            if (noMerge(target)) {
+                // move every exist tile to the highest place
+                compact(board, col);
+
+            }
+            // double merge ✅
+            else if (doubleMerge(target)){
+                Tile t1 = board.tile(col, 0);
+                Tile t2 = board.tile(col, 2);
+                board.move(col, 3, t2);
+
+                // add score
+                score += t2.value() * 2;
+                board.move(col, 1, t1);
+                score += t1.value() * 2;
+
+                Tile t3 = board.tile(col, 1);
+                board.move(col, 2, t3);
+                //board.move(col, 2, t1);
+            }
+            // have merge
+            else if (!noMerge(target)) {
+                compact(board, col);
+                for (int num = 3; num > 0; num--) {
+                    int t1Num;
+                    int t2Num;
+                    if (board.tile(col, num) != null && board.tile(col, num-1) != null) {
+                        t1Num = board.tile(col, num).value();
+                        t2Num = board.tile(col, num - 1).value();
+                        if (t1Num == t2Num) {
+                            board.move(col, num, board.tile(col, num - 1));
+                            score += t1Num * 2;
+                        }
+                    }
+                }
+                compact(board, col);
+            }
+
+
+        }
+        board.setViewingPerspective(Side.NORTH);
 
         checkGameOver();
+    }
+
+    public boolean noMerge(int[] target) {
+        for (int i = 0; i < board.size(); i++) {
+            if (target[i] == target[i+1] && target[i] != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean doubleMerge(int[] target) {
+        if (target[0] == target[1] && target[2] == target[3] && target[0] != 0 && target[2] != 0){
+            return true;
+        }
+        return false;
+    }
+
+    public void compact(Board board, int col) {
+        for (int num = 0; num < board.size(); num++) {
+            for (int i = board.size(); i > 0; i--) {
+                if (board.tile(col, i) == null && board.tile(col, i-1) != null) {
+                    Tile t = board.tile(col, i-1);
+                    board.move(col, i, t);
+                }
+            }
+        }
     }
 
 
