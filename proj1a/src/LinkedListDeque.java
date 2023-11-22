@@ -99,8 +99,17 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T get(int index) {
+        if (index < 1) {
+            return null;
+        } else {
+            for (int i = 0; i < index; i++) {
+                cur.next = cur.next.next;
+            }
+            T curItem = cur.next.item;
+            cur.next = sentinel;
+            return curItem;
+        }
 
-        return null;
     }
 
     @Override
