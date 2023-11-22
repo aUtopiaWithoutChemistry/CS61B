@@ -1,3 +1,4 @@
+import edu.princeton.cs.algs4.In;
 import jh61b.utils.Reflection;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -101,25 +102,29 @@ public class LinkedListDequeTest {
     @Test
     public void removeFirstTest() {
         Deque<Integer> lld1 = new LinkedListDeque<>();
+        Deque<Integer> lld2 = new LinkedListDeque<>();
 
         lld1.addFirst(5); // [5]
         lld1.addFirst(7); // [7, 5]
         lld1.addFirst(9); // [9, 7, 5]
 
-        lld1.removeFirst();  // [7, 5]
+        assertThat(lld1.removeFirst()).isEqualTo(9); // [7, 5]
         assertThat(lld1.toList()).containsExactly(7, 5).inOrder();
+        assertThat(lld2.removeFirst()).isEqualTo(null);
     }
 
     // test the removeLast method
     @Test
     public void removeLastTest() {
          Deque<Integer> lld1 = new LinkedListDeque<>();
+         Deque<Integer> lld2 = new LinkedListDeque<>();
 
          lld1.addFirst(3); // [3]
          lld1.addFirst(9); // [9, 3]
          lld1.addFirst(4); // [4, 9, 3]
 
-         lld1.removeLast();   // [4, 9]
-        assertThat(lld1.toList()).containsExactly(4, 9).inOrder();
+         assertThat(lld1.removeLast()).isEqualTo(3);   // [4, 9]
+         assertThat(lld1.toList()).containsExactly(4, 9).inOrder();
+         assertThat(lld2.removeLast()).isEqualTo(null);
     }
 }
