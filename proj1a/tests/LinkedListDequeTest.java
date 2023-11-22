@@ -97,6 +97,7 @@ public class LinkedListDequeTest {
          assertThat(lld2.isEmpty()).isTrue();
     }
 
+    // test the removeFirst method
     @Test
     public void removeFirstTest() {
         Deque<Integer> lld1 = new LinkedListDeque<>();
@@ -107,5 +108,18 @@ public class LinkedListDequeTest {
 
         lld1.removeFirst();  // [7, 5]
         assertThat(lld1.toList()).containsExactly(7, 5).inOrder();
+    }
+
+    // test the removeLast method
+    @Test
+    public void removeLastTest() {
+         Deque<Integer> lld1 = new LinkedListDeque<>();
+
+         lld1.addFirst(3); // [3]
+         lld1.addFirst(9); // [9, 3]
+         lld1.addFirst(4); // [4, 9, 3]
+
+         lld1.removeLast();   // [4, 9]
+        assertThat(lld1.toList()).containsExactly(4, 9).inOrder();
     }
 }
