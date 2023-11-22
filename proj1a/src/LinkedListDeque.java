@@ -19,12 +19,14 @@ public class LinkedListDeque<T> implements Deque<T> {
     // The whole list at least have a sentinel node and a size
     private Node sentinel;
     private int size;
+    private Node cur;
 
     // constructor method
     public LinkedListDeque() {
         sentinel = new Node(null, null, null);
         sentinel.next = sentinel;
         sentinel.last = sentinel;
+        cur = new Node(null, sentinel, null);
         size = 0;
     }
 
@@ -103,7 +105,15 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T getRecursive(int index) {
-
-        return null;
+        if (index < 0) {
+            return null;
+        }
+        else if (index == 0) {
+            T curItem = cur.next.item;
+            cur.next = sentinel;
+            return curItem;
+        }
+        cur.next = cur.next.next;
+        return getRecursive(index - 1);
     }
 }
