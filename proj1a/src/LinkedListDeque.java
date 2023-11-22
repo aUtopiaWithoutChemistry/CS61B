@@ -57,21 +57,31 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        if (size == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public T removeFirst() {
+        sentinel.next = sentinel.next.next;
+        sentinel.next.last = sentinel;
+        size -= 1;
         return null;
     }
 
     @Override
     public T removeLast() {
+        sentinel.last = sentinel.last.last;
+        sentinel.last.next = sentinel;
+        size -= 1;
         return null;
     }
 
