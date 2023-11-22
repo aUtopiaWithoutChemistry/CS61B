@@ -146,4 +146,23 @@ public class LinkedListDequeTest {
          assertThat(lld1.getRecursive(4)).isEqualTo(4);
          assertThat(lld1.getRecursive(5)).isEqualTo(5);
     }
+
+    // test the get method
+    @Test
+    public void get() {
+        Deque<Integer> lld1 = new LinkedListDeque<>();
+
+        lld1.addLast(1); // [1]
+        lld1.addLast(2); // [1, 2]
+        lld1.addLast(3); // [1, 2, 3]
+        lld1.addLast(4); // [1, 2, 3, 4]
+        lld1.addLast(5); // [1, 2, 3, 4, 5]
+
+        System.out.println(lld1.toList());
+        assertThat(lld1.get(1)).isEqualTo(1);
+        assertThat(lld1.get(2)).isEqualTo(2);
+        assertThat(lld1.get(3)).isEqualTo(3);
+        assertThat(lld1.get(4)).isEqualTo(4);
+        assertThat(lld1.get(5)).isEqualTo(5);
+    }
 }
