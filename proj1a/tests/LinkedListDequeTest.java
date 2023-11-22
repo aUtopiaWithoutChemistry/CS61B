@@ -72,4 +72,33 @@ public class LinkedListDequeTest {
 
     // Below, you'll write your own tests for LinkedListDeque.
 
+    // test the size method only after using add
+    @Test
+    public void sizeAfterAddTest() {
+         Deque<Integer> lld1 = new LinkedListDeque<>();
+
+         lld1.addFirst(0); // 1
+         lld1.addLast(3);  // 2
+         lld1.addFirst(4); // 3
+         lld1.addLast(4);  // 4
+
+        assertThat(lld1.size()).isEqualTo(4);
+    }
+
+    // test the empty method
+    @Test
+    public void emptyTest() {
+         Deque<Integer> lld1 = new LinkedListDeque<>();
+         Deque<Integer> lld2 = new LinkedListDeque<>();
+
+         lld1.addLast(4);
+
+         assertThat(lld1.isEmpty()).isFalse();
+         assertThat(lld2.isEmpty()).isTrue();
+    }
+
+    @Test
+    public void removeFirstTest() {
+
+    }
 }
