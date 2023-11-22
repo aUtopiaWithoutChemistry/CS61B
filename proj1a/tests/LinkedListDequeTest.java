@@ -99,6 +99,13 @@ public class LinkedListDequeTest {
 
     @Test
     public void removeFirstTest() {
+        Deque<Integer> lld1 = new LinkedListDeque<>();
 
+        lld1.addFirst(5); // [5]
+        lld1.addFirst(7); // [7, 5]
+        lld1.addFirst(9); // [9, 7, 5]
+
+        lld1.removeFirst();  // [7, 5]
+        assertThat(lld1.toList()).containsExactly(7, 5).inOrder();
     }
 }
