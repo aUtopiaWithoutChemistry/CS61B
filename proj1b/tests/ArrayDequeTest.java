@@ -94,4 +94,37 @@ public class ArrayDequeTest {
          assertThat(al1.get(-1)).isEqualTo(null);
          assertThat(al1.get(9)).isEqualTo(null);
     }
+
+    @Test
+    public void resizingTest() {
+        Deque<Integer> al1 = new ArrayDeque<>();
+        al1.addFirst(4);
+        al1.addFirst(5);
+        al1.addFirst(6);
+        al1.addFirst(7);
+        al1.addFirst(4);
+        al1.addFirst(5);
+        al1.addFirst(6);
+        al1.addFirst(7);
+        al1.addFirst(4);
+        al1.addFirst(5);
+        al1.addFirst(6);
+        al1.addFirst(7);
+
+        assertThat(al1.toList()).containsExactly(null, null, null, null, 7, 6, 5, 4, 7, 6, 5, 4, 7, 6, 5, 4);
+
+        al1.removeFirst();
+        al1.removeFirst();
+        al1.removeFirst();
+        al1.removeFirst();
+        al1.removeFirst();
+        al1.removeFirst();
+        al1.removeFirst();
+        al1.removeFirst();
+        al1.removeFirst();
+        al1.removeFirst();
+        al1.removeFirst();
+
+        assertThat(al1.toList()).containsExactly(null, null, null, 4);
+    }
 }
