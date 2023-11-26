@@ -64,7 +64,7 @@ public class ArrayDequeTest {
          al1.addFirst(8); // [   4,    6, null, null, null, null,    8,    5]
          assertThat(al1.toList()).containsExactly(4, 6, null, null, null, null, 8, 5);
 
-         al1.removeFirst();
+         assertThat(al1.removeFirst()).isEqualTo(8);
          assertThat(al1.toList()).containsExactly(4, 6, null, null, null, null, null, 5);
     }
 }

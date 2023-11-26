@@ -66,7 +66,16 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T removeFirst() {
-        return null;
+        T first;
+        if (nextFirst < length) {
+            first = item[nextFirst + 1];
+            item[nextFirst + 1] = null;
+        } else {
+            first = item[0];
+            item[0] = null;
+        }
+
+        return first;
     }
 
     @Override
