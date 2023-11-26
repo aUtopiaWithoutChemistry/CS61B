@@ -1,4 +1,5 @@
 import jh61b.utils.Reflection;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -79,5 +80,18 @@ public class ArrayDequeTest {
 
         assertThat(al1.removeLast()).isEqualTo(6);
         assertThat(al1.toList()).containsExactly(4, null, null, null, null, null, 8, 5);
+    }
+
+    @Test
+    public void getTest() {
+         Deque<Integer> al1 = new ArrayDeque<>();
+         al1.addFirst(4);
+         al1.addFirst(5);
+         al1.addFirst(6);
+         al1.addFirst(7);
+
+         assertThat(al1.get(0)).isEqualTo(4);
+         assertThat(al1.get(-1)).isEqualTo(null);
+         assertThat(al1.get(9)).isEqualTo(null);
     }
 }
