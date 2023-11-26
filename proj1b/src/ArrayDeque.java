@@ -61,7 +61,7 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
