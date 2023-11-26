@@ -32,7 +32,13 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public void addLast(T x) {
-
+        item[nextLast] = x;
+        size += 1;
+        if (nextLast == length -1) {
+            nextLast = 0;
+        } else {
+            nextLast += 1;
+        }
     }
 
     @Override
