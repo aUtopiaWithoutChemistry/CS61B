@@ -35,4 +35,15 @@ public class ArrayDequeTest {
          al1.addLast(3); // [   5,    3, null, null, null, null, null, null]
          assertThat(al1.toList()).containsExactly(5, 3, null, null, null, null, null, null).inOrder();
     }
+
+    @Test
+    public void isEmpty() {
+         Deque<Integer> al1 = new ArrayDeque<>();
+         Deque<Integer> al2 = new ArrayDeque<>();
+
+         al1.addLast(4);
+
+         assertThat(al1.isEmpty()).isFalse();
+         assertThat(al2.isEmpty()).isTrue();
+    }
 }
