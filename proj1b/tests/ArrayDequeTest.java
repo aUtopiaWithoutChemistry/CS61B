@@ -54,4 +54,17 @@ public class ArrayDequeTest {
          al1.addLast(5);
          assertThat(al1.size()).isEqualTo(2);
     }
+
+    @Test
+    public void removeFirstTest() {
+         Deque<Integer> al1 = new ArrayDeque<>();
+         al1.addLast(4);  // [   4, null, null, null, null, null, null, null]
+         al1.addLast(6);  // [   4,    6, null, null, null, null, null, null]
+         al1.addFirst(5); // [   4,    6, null, null, null, null, null,    5]
+         al1.addFirst(8); // [   4,    6, null, null, null, null,    8,    5]
+         assertThat(al1.toList()).containsExactly(4, 6, null, null, null, null, 8, 5);
+
+         al1.removeFirst();
+         assertThat(al1.toList()).containsExactly(4, 6, null, null, null, null, null, 5);
+    }
 }
