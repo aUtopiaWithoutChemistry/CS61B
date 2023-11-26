@@ -21,8 +21,11 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public void addFirst(T x) {
-        item[nextFirst] = x;
         size += 1;
+        if (size == length) {
+            resizing();
+        }
+        item[nextFirst] = x;
         if (nextFirst == 0) {
             nextFirst = length - 1;
         } else {
@@ -32,8 +35,11 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public void addLast(T x) {
-        item[nextLast] = x;
         size += 1;
+        if (size == length) {
+            resizing();
+        }
+        item[nextLast] = x;
         if (nextLast == length -1) {
             nextLast = 0;
         } else {
@@ -81,6 +87,9 @@ public class ArrayDeque<T> implements Deque<T> {
                 item[nextFirst] = null;
             }
             size -= 1;
+            if (size < length / 4) {
+                resizing();
+            }
         }
         return first;
     }
@@ -102,6 +111,9 @@ public class ArrayDeque<T> implements Deque<T> {
                 item[nextLast] = null;
             }
             size -= 1;
+            if (size < length / 4) {
+                resizing();
+            }
         }
         return last;
     }
@@ -117,10 +129,42 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T getRecursive(int index) {
-        return null;
+        throw new UnsupportedOperationException("No need to implement getRecursive for proj 1b");
     }
 
-    public ArrayDeque<T> resizing() {
-        return null;
+    public void resizing() {
+        // making it bigger
+        T[] newItem = (T[])new Object[length * 2];
+        if (size == length) {
+            for (int i = nextFirst + 1; i < nextFirst + 1 + length ; i++) {
+                if (i < length) {
+                    newItem[i - nextFirst - 1] = item[i];
+                }
+                else {
+                    newItem[i - nextFirst - 1] = item[i - length];
+                }
+            }
+            length = length * 2;
+            nextFirst = length - 1;
+            nextLast = size;
+            item = newItem;
+        }
+        // making is smaller
+        else if (size < length / 4) {
+            for (int i = nextFirst + 1; i < nextFirst + 1 + length ; i++) {
+                if (i - nextFirst - 1 < length / 4) {
+                    if (i < length) {
+                        newItem[i - nextFirst - 1] = item[i];
+                    }
+                    else {
+                        newItem[i - nextFirst - 1] = item[i - length];
+                    }
+                }
+            }
+            length = length / 2;
+            nextFirst = length - 1;
+            nextLast = size;
+            item = newItem;
+        }
     }
 }
