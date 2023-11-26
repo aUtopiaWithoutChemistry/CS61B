@@ -90,7 +90,7 @@ public class ArrayDequeTest {
          al1.addFirst(6);
          al1.addFirst(7);
 
-         assertThat(al1.get(0)).isEqualTo(4);
+         assertThat(al1.get(7)).isEqualTo(4);
          assertThat(al1.get(-1)).isEqualTo(null);
          assertThat(al1.get(9)).isEqualTo(null);
     }

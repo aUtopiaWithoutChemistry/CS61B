@@ -108,7 +108,11 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T get(int index) {
-        return null;
+        if (index < 0 || index > length){
+            return null;
+        } else {
+            return item[index];
+        }
     }
 
     @Override
