@@ -46,4 +46,12 @@ public class ArrayDequeTest {
          assertThat(al1.isEmpty()).isFalse();
          assertThat(al2.isEmpty()).isTrue();
     }
+
+    @Test
+    public void testSize() {
+         Deque<Integer> al1 = new ArrayDeque<>();
+         al1.addLast(6);
+         al1.addLast(5);
+         assertThat(al1.size()).isEqualTo(2);
+    }
 }
