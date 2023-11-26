@@ -22,10 +22,17 @@ public class ArrayDequeTest {
 
     @Test
     public void testAddFirst() {
-        Deque<Integer> al1 = new ArrayDeque();
-        al1.addFirst(3);
-        al1.addFirst(4);
+        Deque<Integer> al1 = new ArrayDeque<>();
+        al1.addFirst(3); // [null, null, null, null, null, null, null,    3]
+        al1.addFirst(4); // [null, null, null, null, null, null,    4,    3]
         assertThat(al1.toList()).containsExactly(null, null, null, null, null, null, 4, 3).inOrder();
     }
 
+    @Test
+    public void testAddLast() {
+         Deque<Integer> al1 = new ArrayDeque<>();
+         al1.addLast(5); // [   5, null, null, null, null, null, null, null]
+         al1.addLast(3); // [   5,    3, null, null, null, null, null, null]
+         assertThat(al1.toList()).containsExactly(5, 3, null, null, null, null, null, null).inOrder();
+    }
 }
