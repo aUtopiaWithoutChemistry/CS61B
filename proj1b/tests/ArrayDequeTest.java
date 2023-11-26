@@ -37,7 +37,7 @@ public class ArrayDequeTest {
     }
 
     @Test
-    public void isEmpty() {
+    public void testIsEmpty() {
          Deque<Integer> al1 = new ArrayDeque<>();
          Deque<Integer> al2 = new ArrayDeque<>();
 
