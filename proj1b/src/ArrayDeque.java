@@ -10,6 +10,7 @@ public class ArrayDeque<T> implements Deque<T> {
     private int nextFirst;
     private T[] item;
 
+
     /** constructor */
     public ArrayDeque() {
         item = (T[])new Object[8];
