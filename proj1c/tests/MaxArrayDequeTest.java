@@ -21,4 +21,18 @@ public class MaxArrayDequeTest {
         }
     }
 
+    @Test
+    public void LinkedListDequeTest() {
+        Deque<Integer> ll1 = new LinkedListDeque();
+        ll1.addLast(8);
+        ll1.addLast(9);
+        ll1.addLast(6);
+        ll1.addLast(4);
+
+        for(int i : ll1) {
+            System.out.println(i);
+        }
+    }
+    
+
 }
