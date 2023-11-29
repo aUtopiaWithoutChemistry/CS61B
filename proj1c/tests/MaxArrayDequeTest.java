@@ -1,8 +1,10 @@
+import deque.MaxArrayDeque;
 import org.junit.jupiter.api.*;
 import deque.Deque;
 import deque.ArrayDeque;
 import deque.LinkedListDeque;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -99,5 +101,17 @@ public class MaxArrayDequeTest {
 
         assertThat(lld1.toString()).isEqualTo("[front, middle, back]");
         assertThat(ald1.toString()).isEqualTo("[front, middle, back]");
+    }
+
+    @Test
+    public void testMaxArrayDeque() {
+        Comparator<Integer> c = MaxArrayDeque.ArrayDequeComparator.getComparator();
+        MaxArrayDeque<Integer> mad1 = new MaxArrayDeque<>(c);
+        mad1.addLast(3);
+        mad1.addLast(4);
+        mad1.addLast(5);
+
+        assertThat(mad1.max()).isEqualTo(5);
+        assertThat(mad1.max(c)).isEqualTo(5);
     }
 }
