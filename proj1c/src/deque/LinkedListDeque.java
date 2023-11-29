@@ -7,6 +7,7 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public boolean equals(Object obj) {
+        boolean isEqual;
         if (obj instanceof LinkedListDeque<?> lld) {
             if (lld.size == this.size){
                 for(int i = 0; i < size; i++) {
@@ -14,12 +15,18 @@ public class LinkedListDeque<T> implements Deque<T> {
                         return false;
                     }
                 }
-                return true;
+                isEqual = true;
             }
-            return false;
+            else {
+                isEqual = false;
+            }
         }
-        return false;
+        else {
+            isEqual = false;
+        }
+        return isEqual;
     }
+
     @Override
     public Iterator<T> iterator() {
         return new LinkedListDequeIterator();
@@ -150,10 +157,10 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T get(int index) {
-        if (index < 1) {
+        if (index < 0) {
             return null;
         } else {
-            for (int i = 0; i < index; i++) {
+            for (int i = 0; i < index + 1; i++) {
                 cur.next = cur.next.next;
             }
             T curItem = cur.next.item;
