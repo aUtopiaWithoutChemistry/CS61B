@@ -5,6 +5,55 @@ import java.util.List;
 
 public class ArrayDeque<T> implements Deque<T> {
 
+    @Override
+    public boolean equals(Object obj) {
+        boolean isEqual;
+        if (obj instanceof ArrayDeque<?> ald) {
+            if (this.size == ald.size()) {
+                for(int i = 0; i < size; i++) {
+                    if (ald.get(i) != this.get(i)) {
+                        return false;
+                    }
+                }
+                isEqual = true;
+            }
+            else {
+                isEqual = false;
+            }
+        }
+        else {
+            isEqual = false;
+        }
+        return isEqual;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ArrayListDequeIterator();
+    }
+
+    private class ArrayListDequeIterator implements Iterator {
+        private int curPos;
+
+        // constructor
+        public ArrayListDequeIterator() {
+            curPos = 0;
+        }
+
+        public boolean hasNext() {
+            if (curPos < size) {
+                return true;
+            }
+            return false;
+        }
+
+        public T next() {
+            T returnItem = item[curPos];
+            curPos += 1;
+            return returnItem;
+        }
+    }
+
     /** an arrayDeque should have it current size, first and last place for insert. */
     private int size;
     private int length;
@@ -177,33 +226,6 @@ public class ArrayDeque<T> implements Deque<T> {
             nextFirst = length - 1;
             nextLast = size;
             item = newItem;
-        }
-    }
-
-    @Override
-    public Iterator<T> iterator() {
-        return new ArrayListDequeIterator();
-    }
-
-    private class ArrayListDequeIterator implements Iterator {
-        private int curPos;
-
-        // constructor
-        public ArrayListDequeIterator() {
-            curPos = 0;
-        }
-
-        public boolean hasNext() {
-            if (curPos < size) {
-                return true;
-            }
-            return false;
-        }
-
-        public T next() {
-            T returnItem = item[curPos];
-            curPos += 1;
-            return returnItem;
         }
     }
 }

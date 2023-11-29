@@ -35,7 +35,7 @@ public class MaxArrayDequeTest {
     }
 
     @Test
-    public void testEqualDeques() {
+    public void testEqualDeque() {
         Deque<String> lld1 = new LinkedListDeque<>();
         Deque<String> lld2 = new LinkedListDeque<>();
         Deque<String> lld3 = new LinkedListDeque<>();
@@ -56,5 +56,28 @@ public class MaxArrayDequeTest {
         System.out.println(lld1.equals(lld3));
 
         assertThat(lld1).isEqualTo(lld2);
+    }
+
+    @Test
+    public void testEqualArrayDeque() {
+        Deque<String> lld1 = new ArrayDeque<>();
+        Deque<String> lld2 = new ArrayDeque<>();
+        Deque<String> lld3 = new ArrayDeque<>();
+
+        lld1.addLast("front");
+        lld1.addLast("middle");
+        lld1.addLast("back");
+
+        lld2.addLast("front");
+        lld2.addLast("middle");
+        lld2.addLast("back");
+
+        lld3.addLast("front");
+        lld3.addLast("middle");
+        lld3.addLast("end");
+
+        System.out.println(lld1.get(0));
+        assertThat(lld1.equals(lld2)).isEqualTo(true);
+        assertThat(lld1.equals(lld3)).isEqualTo(false);
     }
 }
