@@ -6,6 +6,21 @@ import java.util.List;
 public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof LinkedListDeque<?> lld) {
+            if (lld.size == this.size){
+                for(int i = 0; i < size; i++) {
+                    if (lld.get(i) != this.get(i)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+    @Override
     public Iterator<T> iterator() {
         return new LinkedListDequeIterator();
     }
