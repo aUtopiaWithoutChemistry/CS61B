@@ -6,6 +6,11 @@ import java.util.List;
 public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
+    public String toString(){
+        return this.toList().toString();
+    }
+
+    @Override
     public boolean equals(Object obj) {
         boolean isEqual;
         if (obj instanceof LinkedListDeque<?> lld) {

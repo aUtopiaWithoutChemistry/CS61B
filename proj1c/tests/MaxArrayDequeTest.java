@@ -4,6 +4,7 @@ import deque.ArrayDeque;
 import deque.LinkedListDeque;
 
 import java.util.Iterator;
+import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
@@ -79,5 +80,24 @@ public class MaxArrayDequeTest {
         System.out.println(lld1.get(0));
         assertThat(lld1.equals(lld2)).isEqualTo(true);
         assertThat(lld1.equals(lld3)).isEqualTo(false);
+    }
+
+    @Test
+    public void testToString() {
+        Deque<String> lld1 = new LinkedListDeque<>();
+        Deque<String> ald1 = new ArrayDeque<>();
+
+        lld1.addLast("front");
+        lld1.addLast("middle");
+        lld1.addLast("back");
+        System.out.println(lld1);
+
+        ald1.addLast("front");
+        ald1.addLast("middle");
+        ald1.addLast("back");
+        System.out.println(ald1);
+
+        assertThat(lld1.toString()).isEqualTo("[front, middle, back]");
+        assertThat(ald1.toString()).isEqualTo("[front, middle, back]");
     }
 }

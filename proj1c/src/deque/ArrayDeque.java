@@ -1,9 +1,19 @@
 package deque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 public class ArrayDeque<T> implements Deque<T> {
+
+    @Override
+    public String toString() {
+        List<T> returnList = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            returnList.add(item[i]);
+        }
+        return returnList.toString();
+    }
 
     @Override
     public boolean equals(Object obj) {
