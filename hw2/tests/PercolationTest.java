@@ -4,7 +4,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 public class PercolationTest {
     private int[][] getState(int N, Percolation p) {
-        int[][] state = new int[5][5];
+        int[][] state = new int[N][N];
         for (int r = 0; r < N; r++) {
             for (int c = 0; c < N; c++) {
                 int open = p.isOpen(r, c) ? 1 : 0;
@@ -43,6 +43,9 @@ public class PercolationTest {
     @Test
     public void yourTestHere() {
         // TODO: write some more tests
+        Percolation board = new Percolation(4);
+        System.out.println(board.numberOfOpenSites());
     }
+
 
 }
