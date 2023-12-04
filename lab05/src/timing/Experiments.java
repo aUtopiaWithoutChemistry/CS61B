@@ -60,14 +60,14 @@ public class Experiments {
         List<Integer> opCounts = new ArrayList<>();
 
         // TODO: YOUR CODE HERE
-        // computing AList 100 times to get a more stable number
-        int ops = 100;
+        // computing AList 1 time to get a more stable number
+        int ops = 1;
 
-        for (int N = 1000; N <= 128000; N *= 2) {
+        for (int N = 1000; N <= 128000000; N *= 2) {
+            AList<Integer> al = new AList<>();
             Ns.add(N);
             opCounts.add(ops);
             Stopwatch sw = new Stopwatch();
-            AList<Integer> al = new AList<>();
             for (int i = 0; i < N; i++) {
                 al.addLast(i);
             }
@@ -84,16 +84,32 @@ public class Experiments {
         List<Integer> opCounts = new ArrayList<>();
 
         // TODO: YOUR CODE HERE
+        int ops = 100;
+        for (int N = 1000; N < 128000; N *= 2) {
+            SLList<Integer> sll = new SLList<>();
+            for (int i = 0; i < N; i++) {
+                sll.addLast(i);
+            }
 
-        return null;
+            Ns.add(N);
+            opCounts.add(ops);
+            Stopwatch sw = new Stopwatch();
+
+            for (int j = 0; j < ops; j++) {
+                sll.getLast();
+            }
+            times.add(sw.elapsedTime());
+        }
+
+        return new TimingData(Ns, times, opCounts);
 
     }
 
     public static void main(String[] args) {
         // TODO: Modify the following line to change the experiment you're running
-        TimingData td = timeAListConstruction();
+        TimingData td = timeSLListGetLast();
         // Modify this line to make the chart title make sense
-        String title = "Naive AList";
+        String title = "Naive SLList";
 
         // Convert "times" (in seconds) and "opCounts" to nanoseconds / op
         List<Double> timesUsPerOp = new ArrayList<>();
