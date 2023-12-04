@@ -116,7 +116,7 @@ public class Percolation {
         // check if the first node of the bottom connected to the full set
         // because all the bottom are connected when initialization
         // O(1)
-        if (lastFullElement != -1){
+        if (lastFullElement != -1 || size < 0){
             if (uf.connected(size * (size - 1) + 1, lastFullElement)) {
                 return true;
             }
