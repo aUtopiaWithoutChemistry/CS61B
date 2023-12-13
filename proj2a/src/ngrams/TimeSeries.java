@@ -16,7 +16,6 @@ public class TimeSeries extends TreeMap<Integer, Double> {
     public static final int MIN_YEAR = 1400;
     public static final int MAX_YEAR = 2100;
 
-    private TreeMap<Integer, Double> thisTree;
 
     /**
      * Constructs a new empty TimeSeries.
@@ -32,7 +31,6 @@ public class TimeSeries extends TreeMap<Integer, Double> {
     public TimeSeries(TimeSeries ts, int startYear, int endYear) {
         super();
         // TODO: Fill in this constructor.
-        thisTree = ts;
 
         // find the highest and lowest key in this tree
         int last = ts.lastKey();
@@ -50,6 +48,12 @@ public class TimeSeries extends TreeMap<Integer, Double> {
                 }
             }
         }
+
+        Set<Integer> key = ts.keySet();
+        for (int element : key) {
+            this.put(element, ts.get(element));
+        }
+
     }
 
     /**
