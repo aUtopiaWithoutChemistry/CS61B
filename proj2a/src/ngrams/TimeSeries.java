@@ -2,6 +2,7 @@ package ngrams;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -57,7 +58,7 @@ public class TimeSeries extends TreeMap<Integer, Double> {
     public List<Integer> years() {
         // TODO: Fill in this method.
         List<Integer> yearList = new ArrayList<>();
-        for (Integer key : thisTree.keySet()) {
+        for (Integer key : this.keySet()) {
             yearList.add(key);
         }
         return yearList;
@@ -69,7 +70,11 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public List<Double> data() {
         // TODO: Fill in this method.
-        return null;
+        List<Double> dataList = new ArrayList<>();
+        for (Double value: this.values()) {
+            dataList.add(value);
+        }
+        return dataList;
     }
 
     /**
@@ -83,7 +88,24 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public TimeSeries plus(TimeSeries ts) {
         // TODO: Fill in this method.
-        return null;
+        TimeSeries returnSeries = new TimeSeries();
+        Set<Integer> thisSet = this.keySet();
+        Set<Integer> tsSet = ts.keySet();
+
+        for (int i = MIN_YEAR; i <= MAX_YEAR; i++) {
+            double addValue = 0.0;
+            if (!(thisSet.contains(i)) && !(tsSet.contains(i))) {
+                continue;
+            }
+            if (thisSet.contains(i)) {
+                addValue += this.get(i);
+            }
+            if (tsSet.contains(i)) {
+                addValue += ts.get(i);
+            }
+            returnSeries.put(i, addValue);
+        }
+        return returnSeries;
     }
 
     /**
@@ -97,7 +119,17 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public TimeSeries dividedBy(TimeSeries ts) {
         // TODO: Fill in this method.
-        return null;
+        TimeSeries returnSeries = new TimeSeries();
+        Set<Integer> thisSet = this.keySet();
+        Set<Integer> tsSet = ts.keySet();
+
+        for (int i = MIN_YEAR; i <= MAX_YEAR; i++) {
+            if (thisSet.contains(i) && tsSet.contains(i)) {
+                returnSeries.put(i, this.get(i) / ts.get(i));
+            }
+        }
+
+        return returnSeries;
     }
 
     // TODO: Add any private helper methods.
