@@ -133,7 +133,11 @@ public class NGramMap {
 
         // calculate every year's frequency
         for (int i = startYear; i <= endYear; i++) {
-            returnSeries.put(i, (thisWord.get(i) / yearCounts.get(i)));
+            if (thisWord.get(i) == null) {
+                continue;
+            } else {
+                returnSeries.put(i, (thisWord.get(i) / yearCounts.get(i)));
+            }
         }
 
         return returnSeries;
