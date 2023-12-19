@@ -56,6 +56,8 @@ public class TestBSTMap {
         assertThat(b.get("starChild")).isEqualTo(5);
         assertThat(b.size()).isEqualTo(1);
         b.put("KISS", 5);
+        int value = b.get("KISS");
+        System.out.println(value);
         assertThat(b.get("KISS")).isEqualTo(5);
         assertThat(b.get("starChild")).isNotNull();
         assertThat(b.size()).isEqualTo(2);
